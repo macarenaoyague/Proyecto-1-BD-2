@@ -245,7 +245,7 @@ void scan_all() {
 int main() {
 
    file_name = "data.dat";
-   aux_name = "aux.dat";
+   aux_name = "_aux.dat";
 
 
 
