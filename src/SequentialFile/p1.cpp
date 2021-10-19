@@ -328,15 +328,6 @@ void restructure()
 
 }
 
-void reset_data_file()
-{
-    Registro r;
-    for (int i = 1; i <= 7; i++) {
-        r = read_register(i, file_name);
-        r.show();
-    }
-}
-
 void clear_file(string file_name)
 {
     ofstream ofs;
@@ -353,9 +344,9 @@ int main() {
     //Registro reg = search("P-365");
     //reg.show();
 
-    reset_data_file();
     clear_file(aux_name); 
 
+    /*
     // P-024 Macarena CS 5 
     Registro add_r = Registro();
     add_r.setData();
@@ -368,13 +359,13 @@ int main() {
     }
 
     search_util("P-050").first.show();
+    */
 
     /*
     // P-154 Jose CS 5 
     Registro add_r = Registro();
     add_r.setData();
     add(add_r);
-    */
 
     //search_util("P-151").first.show();
     cout << "Showing data for data file\n";
@@ -388,14 +379,18 @@ int main() {
         Registro r2 = read_register(i, aux_name);
         r2.show();
     }
+    */
 
-   /*
     Registro record;
     for (int i = 0; i < 7; i++) {
         record.setData();
         write_register(record, file_name);
     } 
-    */
+    cout << "Showing data for data file\n";
+    for (int i = 1; i <= 7; i++) {
+        Registro r2 = read_register(i, file_name);
+        r2.show();
+    }
 
     return 0;
 }
