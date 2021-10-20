@@ -309,3 +309,38 @@ bool extendible_hash<T, bucket> :: search_register(int registro_key, T& registro
     cerr << "No se encontró el registro. \n";
     return false;
 }
+
+template <class T, class bucket>
+bool extendible_hash<T, bucket> :: delete_register(int registro_key) {
+    T registro;
+    int key = f(registro_key);  
+    index_hash ih = iterate_key(key);
+    int bucket_position = ih.bucket_position;
+    bucket ihb = read_bucket(bucket_position);
+    for (int i = 0; i < ihb.cant; i++) {
+        registro =  ihb.registros[i];
+        if (registro.rank == registro_key) {
+            for (int j = i+1; j < ihb.cant; j++) 
+                ihb.registros[j-1] = ihb.registros[j];
+            ihb.cant--;
+            write_bucket(ihb, bucket_position);
+            return true;
+        }
+    }
+    while (ihb.next != -1) {
+        bucket_position = ihb.next;
+        ihb = read_bucket(bucket_position);
+        for (int i = 0; i < ihb.cant; i++) {
+            registro =  ihb.registros[i];
+            if (registro.rank == registro_key) {
+                for (int j = i+1; j < ihb.cant; j++) 
+                    ihb.registros[ihb.cant-1] = registro;
+                ihb.cant--;
+                write_bucket(ihb, bucket_position);
+                return true;
+            }
+        }
+    }
+    cerr << "No se encontró el registro. \n";
+    return false;
+}
