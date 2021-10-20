@@ -4,3 +4,7 @@ Debug
 x64
 ConsoleApplication1.sln
 .vscode
+sfml-app
+a.out
+main.o
+vscode/
